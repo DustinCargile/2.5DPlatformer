@@ -32,12 +32,31 @@ public class InputManager : MonoBehaviour
     }
     #endregion
 
+
     private PlayerInputActions _input;
+
+    private bool _playerJump = false;
+    private float _buttonPressTime = 0.01f;
+    private Timer _timer;
+    
     // Start is called before the first frame update
     void Start()
     {
         _input = new PlayerInputActions();
         _input.Player.Enable();
+        _input.Player.Jump.performed += Jump_performed;
+        _input.Player.Jump.canceled += Jump_canceled;
+    }
+
+    private void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        _playerJump = false;
+    }
+
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        _playerJump = true;
+        StartCoroutine(TurnOffJump());
     }
 
     // Update is called once per frame
@@ -45,13 +64,18 @@ public class InputManager : MonoBehaviour
     {
         
     }
-
     public float GetPlayerHorizontalMovement() 
     {
         return _input.Player.Movement.ReadValue<float>();
     }
-    public float GetPlayerJump() 
+    public bool GetPlayerJump() 
     {
-        return _input.Player.Jump.ReadValue<float>();
+        return _playerJump;
+    }
+
+    IEnumerator TurnOffJump() 
+    {
+        yield return new WaitForEndOfFrame();
+        _playerJump = false;
     }
 }
