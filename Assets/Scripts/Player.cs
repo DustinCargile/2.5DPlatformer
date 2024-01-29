@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _gravity = 1.0f;
     [SerializeField] private float _jumpHeight = 5.0f;
 
+    private int _playerCoins;
+
     private bool _spacePressed = false;
     private bool _canDoubleJump = false;
     private bool _didDoubleJump = false;
@@ -98,5 +100,10 @@ public class Player : MonoBehaviour
 
     }
 
+    public void AddCoins(int coins) 
+    {
+        _playerCoins = coins;
+        UIManager.OnCollectibleUpdate?.Invoke(coins);
+    }
 
     }
