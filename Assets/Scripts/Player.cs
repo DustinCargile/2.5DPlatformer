@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,15 +17,22 @@ public class Player : MonoBehaviour
     private bool _didDoubleJump = false;
 
     private float _yVelocity;
+
+    private Scene _scene;
     // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        
     }
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            SceneManager.LoadScene(0);
+        }
         var horizontal = InputManager.Instance.GetPlayerHorizontalMovement();
        
         
