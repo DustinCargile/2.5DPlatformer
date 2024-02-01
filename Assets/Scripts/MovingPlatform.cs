@@ -6,6 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private Transform _pointA, _pointB;
     private Transform _target;
+    [SerializeField] private float _speed = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
 
         if (transform.position == _pointA.position)
         {

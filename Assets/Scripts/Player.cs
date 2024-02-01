@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _gravity = 1.0f;
     [SerializeField] private float _jumpHeight = 5.0f;
+   
 
     private int _playerCoins;
 
