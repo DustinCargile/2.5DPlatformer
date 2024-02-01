@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour
     private bool _didDoubleJump = false;
 
     private float _yVelocity;
+
+    public static Action OnMovingPlatform;
     // Start is called before the first frame update
     void Start()
     {
@@ -102,8 +105,8 @@ public class Player : MonoBehaviour
 
     public void AddCoins(int coins) 
     {
-        _playerCoins = coins;
-        UIManager.OnCollectibleUpdate?.Invoke(coins);
+        _playerCoins += coins;
+        UIManager.OnCollectibleUpdate?.Invoke(_playerCoins);
     }
 
     }
